@@ -32,6 +32,7 @@ add_executable(shelly
     src/util.h
     src/prompt.cpp
     src/prompt.h
+    src/execute.h
 )
 
 # Optional: Enable common warnings to keep your code sharp

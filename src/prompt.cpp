@@ -1,4 +1,5 @@
 #include "prompt.h"
+#include "execute.h"
 #include "util.h"
 #include <bits/stdc++.h>
 #include <ranges>
@@ -30,6 +31,8 @@ int prompt::loop() {
     }
 
     util::print_container(cmd_args);
+
+    execue_command(cmd_args[0]);
 
 
     if (cmd_args[0] == "quit") {
