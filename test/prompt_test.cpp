@@ -1,16 +1,33 @@
-#include <gtest/gtest.h>
 #include "../src/prompt.h" // Assuming you have some logic here
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+#include <sstream>
 
-struct PromptFixture : public::testing::Test{
-    shelly::prompt p;
+struct PromptFixture : public ::testing::Test {
+  shelly::prompt p;
+  std::stringstream test_input_stream;
+  std::stringstream test_output_stream;
 
-    void SetUp(){}
+  void SetUp() {
+    p.setStdIn(test_input_stream);
+    p.setStdOut(test_output_stream);
+  }
 };
-
 
 TEST_F(PromptFixture, CollectingTokens) {
 
-    ASSERT_EQ(1, 1);
+  using DataAndExpected = std::pair<std::string, std::vector<std::string>>;
 
+  std::vector<DataAndExpected> data_set{
+      {"hello", {"hello"}},
+      {" hello ", {"hello"}},
+      {"    hello    ", {"hello"}},
+      {"hello to you", {"hello", "to", "you"}}};
 
+  std::for_each(data_set.begin(), data_set.end(), [&](auto data_entry) {
+    test_input_stream.clear();
+    test_input_stream << data_entry.first;
+    auto data = p.readLine();
+    EXPECT_THAT(data_entry.second, ::testing::ContainerEq(data));
+  });
 }

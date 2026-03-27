@@ -17,6 +17,7 @@ include(FetchContent)
 FetchContent_Declare(
   googletest
   URL https://github.com/google/googletest/archive/refs/heads/main.zip
+  GIT_TAG        v1.14.0
 )
 # For Windows compatibility: prevents GTest from overriding your compiler settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
@@ -48,6 +49,7 @@ target_include_directories(unit_tests PRIVATE include)
 target_link_libraries(unit_tests
     PRIVATE
         GTest::gtest_main  # automatically provides a main() for tests
+        GTest::gmock
 )
 
 # Enable "ctest" command
