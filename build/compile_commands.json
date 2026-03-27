@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/tomek/Projects/shell/build",
+  "command": "/usr/bin/c++   -std=c++23 -Wall -Wextra -Wpedantic -o CMakeFiles/shelly.dir/src/main.cpp.o -c /home/tomek/Projects/shell/src/main.cpp",
+  "file": "/home/tomek/Projects/shell/src/main.cpp",
+  "output": "CMakeFiles/shelly.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/tomek/Projects/shell/build",
+  "command": "/usr/bin/c++   -std=c++23 -Wall -Wextra -Wpedantic -o CMakeFiles/shelly.dir/src/prompt.cpp.o -c /home/tomek/Projects/shell/src/prompt.cpp",
+  "file": "/home/tomek/Projects/shell/src/prompt.cpp",
+  "output": "CMakeFiles/shelly.dir/src/prompt.cpp.o"
+}
+]
