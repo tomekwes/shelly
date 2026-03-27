@@ -25,8 +25,12 @@ int prompt::loop() {
   while (true) {
     printCaret();
     auto cmd_args = readLine();
+    if(cmd_args.size() == 0){
+        continue;
+    }
 
     util::print_container(cmd_args);
+
 
     if (cmd_args[0] == "quit") {
       return 0;
