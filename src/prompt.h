@@ -3,16 +3,15 @@
 #include <string>
 #include <vector>
 
-namespace shelly{
-struct prompt{
+namespace shelly {
+struct prompt {
 
-    void loop();
+  int loop();
 
-    private:
-    std::vector<std::string> readLine();
-    void printCaret();
+private:
+  std::vector<std::string> readLine();
+  void printCaret() const;
 
-    std::vector<std::string> last_command_;
-
+  std::vector<std::string> last_command_;
 };
-}
+} // namespace shelly
