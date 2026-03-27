@@ -10,8 +10,10 @@ std::vector<std::string> prompt::readLine() {
 
   std::string command_and_arguments{};
   std::getline(std::cin, command_and_arguments);
-  auto tokens = command_and_arguments | std::views::split(' ') |
-                std::ranges::to<std::vector<std::string>>();
+  auto tokens =
+      command_and_arguments | std::views::split(' ') |
+      std::views::filter([](auto elem) { return !std::ranges::empty(elem); }) |
+      std::ranges::to<std::vector<std::string>>();
   last_command_ = tokens;
   return tokens;
 }
@@ -26,8 +28,8 @@ int prompt::loop() {
 
     util::print_container(cmd_args);
 
-    if(cmd_args[0] == "quit"){
-        return 0;
+    if (cmd_args[0] == "quit") {
+      return 0;
     }
   }
 }
