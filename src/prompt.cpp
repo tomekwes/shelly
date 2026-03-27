@@ -9,7 +9,7 @@ namespace shelly {
 std::vector<std::string> prompt::readLine() {
 
   std::string command_and_arguments{};
-  std::getline(std::cin, command_and_arguments);
+  std::getline(in.get(), command_and_arguments);
   auto tokens =
       command_and_arguments | std::views::split(' ') |
       std::views::filter([](auto elem) { return !std::ranges::empty(elem); }) |
@@ -18,7 +18,7 @@ std::vector<std::string> prompt::readLine() {
   return tokens;
 }
 
-void prompt::printCaret() const { std::cout << "> "; }
+void prompt::printCaret() const { out.get() << "> "; }
 
 int prompt::loop() {
 

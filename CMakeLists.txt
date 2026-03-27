@@ -11,6 +11,17 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+include(FetchContent)
+
+# --- Fetch GoogleTest ---
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/heads/main.zip
+)
+# For Windows compatibility: prevents GTest from overriding your compiler settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
 # Keep the binary output organized
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -24,3 +35,21 @@ add_executable(shelly
 
 # Optional: Enable common warnings to keep your code sharp
 target_compile_options(shelly PRIVATE -Wall -Wextra -Wpedantic)
+
+# We create a separate binary just for tests
+add_executable(unit_tests
+    test/prompt_test.cpp
+    src/prompt.h
+    src/prompt.cpp  # Link the files you want to test
+)
+target_include_directories(unit_tests PRIVATE include)
+
+# Link GTest
+target_link_libraries(unit_tests
+    PRIVATE
+        GTest::gtest_main  # automatically provides a main() for tests
+)
+
+# Enable "ctest" command
+include(CTest)
+add_test(NAME AllTests COMMAND unit_tests)
