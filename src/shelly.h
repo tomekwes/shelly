@@ -5,8 +5,6 @@
 #include "builtin/registry.h"
 #include "execute.h"
 #include "prompt.h"
-#include "util.h"
-#include <cstdlib>
 
 namespace shelly {
 

@@ -5,6 +5,7 @@
 #include <string>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <tuple>
 #include <unistd.h>
 #include <vector>
 
@@ -12,12 +13,12 @@ namespace shelly {
 
 /// Execute single program and pass arguments to it
 /// TODO:
+/// return string output so that it can be handled somewhere else
 /// Rework so that it uses parameter pack - maybe it would be better
 inline void execue_command(std::string program_name,
                            std::vector<std::string> program_args) {
 
   pid_t pid{};
-  pid_t wpid{};
   int status;
   std::array<int, 2> pipefd;
   std::vector<char *> c_args;
@@ -55,9 +56,9 @@ inline void execue_command(std::string program_name,
 
     close(pipefd[0]); // Close read end
     do {
-      wpid = waitpid(pid, &status, WUNTRACED);
+      std::ignore = waitpid(pid, &status, WUNTRACED);
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-    std::cout << "Captured: " << captured_output << std::endl;
+    std::cout << captured_output;
   }
 }
 

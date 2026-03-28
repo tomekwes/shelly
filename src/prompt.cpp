@@ -1,6 +1,4 @@
 #include "prompt.h"
-#include "execute.h"
-#include "util.h"
 #include <bits/stdc++.h>
 #include <ranges>
 #include <string>
@@ -27,6 +25,5 @@ std::vector<std::string> prompt::readLine() {
 /// Add user define caret symbols
 /// with commands that could get username or git branch
 void prompt::printCaret() const { out.get() << "> "; }
-
 
 } // namespace shelly
