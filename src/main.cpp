@@ -1,7 +1,6 @@
-#include "prompt.h"
+#include "shelly.h"
 
 int main() {
 
-  shelly::prompt p;
-  return p.loop();
+  return shelly::shelly{}.run();
 }

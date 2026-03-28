@@ -8,7 +8,6 @@
 namespace shelly {
 struct prompt {
 
-  int loop();
   void setStdIn(std::istream &s) { in = s; }
   void setStdOut(std::ostream &s) { out = s; }
   std::vector<std::string> readLine();

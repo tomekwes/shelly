@@ -13,16 +13,15 @@ template <std::ranges::range R> auto to_vector(R &&r) {
 
 template <typename Container> void print_container(const Container &c) {
   std::cout << "[";
-  if (c.size() == 0) {
-    std::cout << "]" << std::endl;
-    return;
+  if (c.size() != 0) {
+    auto it = c.cbegin();
+    for (typename Container::size_type i{0}; i < c.size() - 1; i++) {
+      std::cout << *it << ",";
+      it++;
+    }
+    std::cout << *it;
   }
-  auto it = c.cbegin();
-  for (typename Container::size_type i{0}; i < c.size() - 1; i++) {
-    std::cout << *it << ",";
-    it++;
-  }
-  std::cout << *it << "]" << std::endl;
+  std::cout << "]" << std::endl;
 }
 
 } // namespace shelly::util
