@@ -34,6 +34,12 @@ add_executable(shelly
     src/prompt.h
     src/execute.h
     src/shelly.h
+    src/builtin/builtin.h
+    src/builtin/cd.h
+    src/builtin/exit.h
+    src/builtin/registry.h
+    src/builtin/registry.cpp
+    src/builtin/all_commands.h
 )
 
 # Optional: Enable common warnings to keep your code sharp

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "builtin/all_commands.h"
+#include "builtin/exit.h"
+#include "builtin/registry.h"
 #include "execute.h"
 #include "prompt.h"
 #include "util.h"
@@ -11,6 +14,11 @@ namespace shelly {
 /// handle singals like CTRL+C
 struct shelly {
 
+  shelly() {
+    builtin_registry.WithCommand("cd", std::make_shared<buildin::Cd>())
+        .WithCommand("exit", std::make_shared<buildin::Exit>());
+  }
+
   /// Arguments passed to shelly
   /// TODO:
   /// config file path
@@ -19,7 +27,6 @@ struct shelly {
   void parseArguments() {}
 
   int run() {
-
     parseArguments();
     loop();
     return 0;
@@ -28,6 +35,8 @@ struct shelly {
   void loop() {
 
     while (true) {
+
+      // Collect user input
       prompt prt;
       prt.printCaret();
       auto cmd_args = prt.readLine();
@@ -35,13 +44,19 @@ struct shelly {
         continue;
       }
 
-      execue_command(cmd_args[0], cmd_args);
+      // Check if its a built in command
+      if (builtin_registry.isBuildinCommand(cmd_args[0])) {
+        auto cmd = builtin_registry.GetCommand(cmd_args[0]);
+        cmd->execute(cmd_args);
+        continue;
+      }
 
-      // if (cmd_args[0] == "quit") {
-      //   exit 0;
-      // }
+      // Try to execute program
+      execue_command(cmd_args[0], cmd_args);
     }
   }
+
+  Registry builtin_registry;
 };
 
 } // namespace shelly
