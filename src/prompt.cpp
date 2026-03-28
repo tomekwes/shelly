@@ -7,6 +7,9 @@
 
 namespace shelly {
 
+/// Read line from input stream
+/// TODO:
+/// support operator | ; && ||
 std::vector<std::string> prompt::readLine() {
 
   std::string command_and_arguments{};
@@ -19,6 +22,10 @@ std::vector<std::string> prompt::readLine() {
   return tokens;
 }
 
+/// Wrtie to output stream caret symbol
+/// TODO:
+/// Add user define caret symbols
+/// with commands that could get username or git branch
 void prompt::printCaret() const { out.get() << "> "; }
 
 

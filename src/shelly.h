@@ -1,14 +1,21 @@
 #pragma once
 
+#include "execute.h"
 #include "prompt.h"
 #include "util.h"
-#include "execute.h"
 #include <cstdlib>
 
 namespace shelly {
 
+/// TODO:
+/// handle singals like CTRL+C
 struct shelly {
 
+  /// Arguments passed to shelly
+  /// TODO:
+  /// config file path
+  /// help
+  /// version
   void parseArguments() {}
 
   int run() {
@@ -28,10 +35,7 @@ struct shelly {
         continue;
       }
 
-      util::print_container(cmd_args);
-
-      decltype(cmd_args) args{cmd_args.begin()+1, cmd_args.end()};
-      execue_command(cmd_args[0], args);
+      execue_command(cmd_args[0], cmd_args);
 
       // if (cmd_args[0] == "quit") {
       //   exit 0;
