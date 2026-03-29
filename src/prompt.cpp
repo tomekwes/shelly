@@ -1,4 +1,5 @@
 #include "prompt.h"
+#include "util.h"
 #include <bits/stdc++.h>
 #include <ranges>
 #include <string>
@@ -8,14 +9,12 @@ namespace shelly {
 /// Read line from input stream
 /// TODO:
 /// support operator | ; && ||
+/// fill last command to $?
 std::vector<std::string> prompt::readLine() {
 
   std::string command_and_arguments{};
   std::getline(in.get(), command_and_arguments);
-  auto tokens =
-      command_and_arguments | std::views::split(' ') |
-      std::views::filter([](auto elem) { return !std::ranges::empty(elem); }) |
-      std::ranges::to<std::vector<std::string>>();
+  auto tokens{util::WordExpansion{command_and_arguments}.getTokens()};
   last_command_ = tokens;
   return tokens;
 }

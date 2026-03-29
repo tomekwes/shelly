@@ -22,6 +22,7 @@ TEST_F(PromptFixture, CollectingTokens) {
       {"hello", {"hello"}},
       {" hello ", {"hello"}},
       {"    hello    ", {"hello"}},
+      {"git commit -m \"commit data\"", {"git", "commit", "-m", "commit data"}},
       {"hello to you", {"hello", "to", "you"}}};
 
   std::for_each(data_set.begin(), data_set.end(), [&](auto data_entry) {
