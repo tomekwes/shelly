@@ -37,6 +37,7 @@ add_executable(shelly
     src/builtin/builtin.h
     src/builtin/cd.h
     src/builtin/exit.h
+    src/builtin/history.h
     src/builtin/registry.h
     src/builtin/registry.cpp
     src/builtin/all_commands.h

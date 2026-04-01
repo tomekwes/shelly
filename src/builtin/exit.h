@@ -3,7 +3,7 @@
 #include "builtin.h"
 #include <unistd.h>
 
-namespace shelly::buildin {
+namespace shelly::builtin {
 
 struct Exit : public Builtin {
 
@@ -12,4 +12,4 @@ struct Exit : public Builtin {
   }
 };
 
-} // namespace shelly::buildin
+} // namespace shelly::builtin

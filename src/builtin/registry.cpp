@@ -3,13 +3,13 @@
 
 namespace shelly {
 
-bool Registry::isBuildinCommand(std::string name) {
+bool Registry::isBuiltinCommand(std::string name) {
   auto it = reg.find(name);
   return it != reg.end();
 }
 
 Registry &Registry::WithCommand(std::string name,
-                                std::shared_ptr<buildin::Builtin> cmd) {
+                                std::shared_ptr<builtin::Builtin> cmd) {
 
   auto ret = reg.insert({name, cmd});
   if (!ret.second) {
@@ -18,7 +18,7 @@ Registry &Registry::WithCommand(std::string name,
   return *this;
 }
 
-std::shared_ptr<buildin::Builtin> Registry::GetCommand(std::string name) {
+std::shared_ptr<builtin::Builtin> Registry::GetCommand(std::string name) {
 
   auto it = reg.find(name);
   if (it == reg.end()) {

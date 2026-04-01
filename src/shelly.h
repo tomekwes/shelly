@@ -5,6 +5,7 @@
 #include "builtin/registry.h"
 #include "execute.h"
 #include "prompt.h"
+#include <memory>
 
 namespace shelly {
 
@@ -13,8 +14,9 @@ namespace shelly {
 struct shelly {
 
   shelly() {
-    builtin_registry.WithCommand("cd", std::make_shared<buildin::Cd>())
-        .WithCommand("exit", std::make_shared<buildin::Exit>());
+    builtin_registry.WithCommand("cd", std::make_shared<builtin::Cd>())
+        .WithCommand("exit", std::make_shared<builtin::Exit>())
+        .WithCommand("history", std::make_shared<builtin::History>());
   }
 
   /// Arguments passed to shelly
@@ -42,10 +44,16 @@ struct shelly {
         continue;
       }
 
+      auto history_ptr = std::dynamic_pointer_cast<builtin::History>(
+          builtin_registry.GetCommand("history"));
+      history_ptr->record(cmd_args);
+
       // Check if its a built in command
-      if (builtin_registry.isBuildinCommand(cmd_args[0])) {
+      if (builtin_registry.isBuiltinCommand(cmd_args[0])) {
         auto cmd = builtin_registry.GetCommand(cmd_args[0]);
-        cmd->execute(cmd_args);
+        if (auto output = cmd->execute(cmd_args); output.has_value()) {
+          std::cout << output.value() << std::endl;
+        }
         continue;
       }
 

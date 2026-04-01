@@ -8,7 +8,7 @@
 #include <iostream>
 #include <unistd.h>
 
-namespace shelly::buildin {
+namespace shelly::builtin {
 
 struct Cd : public Builtin {
 
@@ -60,4 +60,4 @@ struct Cd : public Builtin {
   std::optional<std::filesystem::path> previous_path{std::nullopt};
 };
 
-} // namespace shelly::buildin
+} // namespace shelly::builtin

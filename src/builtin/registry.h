@@ -7,12 +7,12 @@
 namespace shelly {
 struct Registry {
 
-  std::unordered_map<std::string, std::shared_ptr<buildin::Builtin>> reg;
+  std::unordered_map<std::string, std::shared_ptr<builtin::Builtin>> reg;
 
-  bool isBuildinCommand(std::string name);
+  bool isBuiltinCommand(std::string name);
   Registry &WithCommand(std::string name,
-                        std::shared_ptr<buildin::Builtin> cmd);
-  std::shared_ptr<buildin::Builtin> GetCommand(std::string name);
+                        std::shared_ptr<builtin::Builtin> cmd);
+  std::shared_ptr<builtin::Builtin> GetCommand(std::string name);
 };
 
 } // namespace shelly
